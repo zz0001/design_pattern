@@ -1,6 +1,6 @@
 package 工厂模式;
 
-public class PizzaStore {
+public abstract class PizzaStore {
 	//加入对SimplePizzaFactory的引用
 	SimplePizzaFactory factory;
 	
@@ -13,8 +13,14 @@ public class PizzaStore {
 	public Pizza orderPizza(String type){
 		Pizza pizza;
 		//这里不再使用new操作
-		pizza = factory.createPizza(type);
+		pizza = createPizza(type);
 		pizza.prepare();
 		pizza.bake();
+		//······
+		return pizza;
 	}
+	
+	//把工厂对象移到这个方法中。工厂方法现在是抽象的
+	//各个子类覆盖定义自己的具体方法
+	abstract Pizza createPizza(String type);
 }
